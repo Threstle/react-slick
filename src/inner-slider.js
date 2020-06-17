@@ -387,7 +387,16 @@ export class InnerSlider extends React.Component {
     this.setState(state, () => {
       asNavFor && asNavFor.innerSlider.slideHandler(index);
       if (!nextState) return;
+
+
+        let animationUpdate = setInterval(()=>{
+            if(this.props.onSwipeMove)this.props.onSwipeMove();
+        },10)
+
       this.animationEndCallback = setTimeout(() => {
+
+          clearInterval(animationUpdate);
+
         const { animating, ...firstBatch } = nextState;
         this.setState(firstBatch, () => {
           this.callbackTimers.push(
@@ -435,6 +444,10 @@ export class InnerSlider extends React.Component {
     window.ontouchmove = null;
   };
   swipeStart = e => {
+
+
+      if(this.props.onSwipeStart)this.props.onSwipeStart();
+
     if (this.props.verticalSwiping) {
       this.disableBodyScroll();
     }
@@ -442,6 +455,10 @@ export class InnerSlider extends React.Component {
     state !== "" && this.setState(state);
   };
   swipeMove = e => {
+
+
+      if(this.props.onSwipeMove)this.props.onSwipeMove();
+
     let state = swipeMove(e, {
       ...this.props,
       ...this.state,

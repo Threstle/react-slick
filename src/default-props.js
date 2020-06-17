@@ -29,6 +29,8 @@ let defaultProps = {
   onInit: null,
   onLazyLoadError: null,
   onReInit: null,
+    onSwipeMove: null,
+    onSwipeStart: null,
   pauseOnDotsHover: false,
   pauseOnFocus: false,
   pauseOnHover: true,
